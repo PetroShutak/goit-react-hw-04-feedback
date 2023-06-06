@@ -1,20 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import css from './FeedbackOptions.module.css';
+import { Button, Wrapper } from './FeedbackOptions.styled';
+import { FaThumbsUp, FaThumbsDown, FaMeh } from 'react-icons/fa';
 
 const FeedbackOptions = ({ options, onLeaveFeedback }) => {
+  const renderIcon = (option) => {
+    switch (option) {
+      case 'good' :
+        return <FaThumbsUp />;
+      case 'bad' :
+        return <FaThumbsDown />;
+      case 'neutral' :
+        return <FaMeh />;
+      default:
+        return null;
+    }
+  };
+
   return (
-    <div >
-      {options.map(option => (
-        <button
-          key={option}
-          type="button"
-          onClick={() => onLeaveFeedback(option)}
-        >
+    <Wrapper>
+      {options.map((option) => (
+        <Button key={option} onClick={() => onLeaveFeedback(option)}>
+          {renderIcon(option)}
           {option}
-        </button>
+        </Button>
       ))}
-    </div>
+    </Wrapper>
   );
 };
 
@@ -24,4 +35,3 @@ FeedbackOptions.propTypes = {
 };
 
 export default FeedbackOptions;
-

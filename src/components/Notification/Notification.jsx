@@ -1,13 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import css from './Notification.module.css';
-import { getRandomColor } from '../../utils/getRandom';
+import { NotificationWrapper, NotificationMessage } from './Notification.styled';
 
 const Notification = ({ message }) => {
   return (
-    <div style={{ backgroundColor: getRandomColor() }}>
-      <p>{message}</p>
-    </div>
+    <NotificationWrapper>
+      <NotificationMessage>{message}</NotificationMessage>
+    </NotificationWrapper>
   );
 };
 
@@ -16,5 +15,3 @@ Notification.propTypes = {
 };
 
 export default Notification;
-
-

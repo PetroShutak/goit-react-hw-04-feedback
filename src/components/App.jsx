@@ -5,28 +5,32 @@ import Section from './Section/Section';
 import Notification from './Notification/Notification';
 import Footer from './Footer/Footer';
 
-
 export const App = () => {
-  const [feedback, setFeedback] = useState({
-    good: 0,
-    neutral: 0,
-    bad: 0,
-  });
+  const [good, setGood] = useState(0);
+  const [neutral, setNeutral] = useState(0);
+  const [bad, setBad] = useState(0);
 
-  const handleFeedback = (option) => {
-    setFeedback((prevState) => ({
-      ...prevState,
-      [option]: prevState[option] + 1,
-    }));
+  const handleFeedback = option => {
+    switch (option) {
+      case 'good':
+        setGood(prevGood => prevGood + 1);
+        break;
+      case 'neutral':
+        setNeutral(prevNeutral => prevNeutral + 1);
+        break;
+      case 'bad':
+        setBad(prevBad => prevBad + 1);
+        break;
+      default:
+        break;
+    }
   };
 
   const countTotalFeedback = () => {
-    const { good, neutral, bad } = feedback;
     return good + neutral + bad;
   };
 
   const countPositiveFeedbackPercentage = () => {
-    const { good } = feedback;
     const total = countTotalFeedback();
     return total > 0 ? Math.round((good / total) * 100) : 0;
   };
@@ -40,9 +44,9 @@ export const App = () => {
         <>
           <Section title="Statistics">
             <Statistics
-              good={feedback.good}
-              neutral={feedback.neutral}
-              bad={feedback.bad}
+              good={good}
+              neutral={neutral}
+              bad={bad}
               total={total}
               positivePercentage={positivePercentage}
             />
@@ -68,7 +72,3 @@ export const App = () => {
     </div>
   );
 };
-
- 
-
-
